@@ -8,6 +8,7 @@ Proof of Concept with MXNet and GPUs
 * Model: LeNet
 * Based on https://github.com/dmlc/mxnet/blob/master/docs/how_to/multi_devices.md#how-to-launch-a-job
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 AMI, mxnet==0.9.3, libcudnn.so.5
+* **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, libcudnn.so.5 (CuDNN 5.1)
 
 ```
 time python train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-size 128
@@ -34,6 +35,10 @@ time python train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-
 | 1 | mlp | 128 | 3 | 0.982 | 12 | 1.0=(18.3-6)/12 (59000 samples/s)
 | 1 | mlp | 128 | 4 | 0.981 | 12 | 1.3=(22.3-6)/12 (46000 samples/s)
 | 1 | mlp | 128 | 8 | 0.981 | 12 | 2.3=(39.3-6)/12 (25500 samples/s)
+| 2 | lenet | 128 | 1 | 0.992 | 12 | 2.7=(36.4-6)/12 (22500 samples/s) 
+| 2 | lenet | 128 | 2 | 0.992 | 12 | 2.0=(30.3-6)/12 (29500 samples/s)
+| 2 | lenet | 128 | 0 | 0.992 | 12 | 40.0=(1500?-6)/12 (500 samples/s)
+
 
 
 
