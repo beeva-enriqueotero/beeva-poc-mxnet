@@ -11,7 +11,7 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, libcudnn.so.5 (CuDNN 5.1)
 
 ```
-time python train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-size 128
+time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-size 128
 ```
 
 
