@@ -28,9 +28,11 @@ time python train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-
 | 1 | 128 | 3 | 0.992 | 12 | 1.4=(23.6-6)/12 (43000 samples/s)
 | 1 | 128 | 4 | 0.992 | 12 | 1.5=(24.6-6)/12 (41000 samples/s)
 | 1 | 128 | 8 | 0.992 | 12 | 2.9=(46.5-6)/12 (21000 samples/s)
+| 1 | 128 | 0 | 0.992 | 12 | 40.0=(486.0-6)/12? (1500 samples/s)
 
 
-#### Conclusions: 
+#### Conclusions:
+* 1 NVIDIA Tesla K80 is 17x faster than Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
 * With AWS p2.8x 3 gpus is the fastest configuration. Between 25% and 40% faster than 1 gpu
 * With AWS 4 gpus is slightly faster than 1. And 8 gpus is the slowest
 
