@@ -37,7 +37,7 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 | 1 | mlp | 128 | 8 | 0.981 | 12 | 2.3=(39.3-6)/12 (25500 samples/s)
 | 2 | lenet | 128 | 1 | 0.992 | 12 | 2.7=(36.4-6)/12 (22500 samples/s) 
 | 2 | lenet | 128 | 2 | 0.992 | 12 | 2.0=(30.3-6)/12 (29500 samples/s)
-| 2 | lenet | 128 | 0 | 0.992 | 12 | 40.0=(1500?-6)/12 (500 samples/s)
+| 2 | lenet | 128 | 0 | 0.992 | 12 | 120.0=(1500?-6)/12 (500 samples/s)
 
 
 
