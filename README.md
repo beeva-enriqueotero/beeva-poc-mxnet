@@ -7,8 +7,8 @@ Proof of Concept with MXNet and GPUs
 * Dataset: MNIST. 60000 train samples, 10000 test samples
 * Model: LeNet
 * Based on https://github.com/dmlc/mxnet/blob/master/docs/how_to/multi_devices.md#how-to-launch-a-job
-* **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 AMI, mxnet==0.9.3, libcudnn.so.5
-* **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, libcudnn.so.5 (CuDNN 5.1)
+* **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 AMI, mxnet==0.9.3, CUDA 7.5, libcudnn.so.5
+* **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1)
 
 ```
 time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-size 128
@@ -47,3 +47,5 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 * With AWS p2.8x 3 gpus is the fastest configuration. Between 25% and 40% faster than 1 gpu
 * With AWS 4 gpus is slightly faster than 1. And 8 gpus is the slowest
 
+#### Speed issues:
+* See https://github.com/dmlc/mxnet/blob/master/docs/how_to/faq.md#speed
