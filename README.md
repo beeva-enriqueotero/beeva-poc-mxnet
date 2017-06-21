@@ -9,6 +9,7 @@ Proof of Concept with MXNet and GPUs
 * Based on https://github.com/dmlc/mxnet/blob/master/docs/how_to/multi_devices.md#how-to-launch-a-job
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 AMI, mxnet==0.9.3, CUDA 7.5, libcudnn.so.5
 * **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
+* **Infrastructure 3**: Google n1-highmem-32 with 8 gpus (nvidia Tesla K80), mxnet_cu80-0.10.0-py2.py3-none-manylinux1_x86_64.whl, [mxnet](https://github.com/dmlc/mxnet/commit/3ceb6d2f91121d5ffa5b81f435e8bcfcc1a75792), NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
 
 ```
 time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-size 128
@@ -38,8 +39,17 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 | 2 | lenet | 128 | 1 | 0.992 | 12 | 2.7=(36.4-6)/12 (22500 samples/s) 
 | 2 | lenet | 128 | 2 | 0.992 | 12 | 2.0=(30.3-6)/12 (29500 samples/s)
 | 2 | lenet | 128 | 0 | 0.992 | 12 | 120.0=(1500?-6)/12 (500 samples/s)
-
-
+| 3 | lenet | 128 | 0 | 0.992 | 12 | 59.5=(1200?-6)/12 (1000 samples/s)
+| 3 | lenet | 128 | 1 | 0.992 | 12 | 2.5=(38.8-6)/12 (24500 samples/s)
+| 3 | lenet | 128 | 2 | 0.992 | 12 | 2.4=(35.7-6)/12 (28800 samples/s)
+| 3 | lenet | 128 | 4 | 0.992 | 12 | 2.4=(43.5-6)/12 (25000 samples/s)
+| 3 | lenet | 128 | 8 | 0.991 | 12 | 2.4=(60.0-6)/12 (19500 samples/s)
+| 3 | lenet | 256 | 8 | 0.992 | 12 | 1.4=(39.1-6)/12 (42500 samples/s)
+| 3 | lenet | 512 | 1 | 0.990 | 12 | 1.7=(28.2-6)/12 (35000 samples/s)
+| 3 | lenet | 512 | 8 | 0.990 | 12 | 0.8=(29.6-6)/12 (76000 samples/s)
+| 3 | lenet | 1024 | 1 | 0.963 | 12 | (9.2-6)/12 (? samples/s)
+| 3 | lenet | 1024 | 8 | 0.990 | 12 | 0.8=(29.6-6)/12 (76500 samples/s)
+| 3 | lenet | 2048 | 8 | 0.987 | 12 | (24.0-6)/12 (? samples/s)
 
 
 #### Conclusions:
