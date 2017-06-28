@@ -7,7 +7,7 @@ Proof of Concept with MXNet and GPUs
 * Dataset: MNIST. 60000 train samples, 10000 test samples
 * Model: LeNet
 * Based on https://github.com/dmlc/mxnet/blob/master/docs/how_to/multi_devices.md#how-to-launch-a-job
-* **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 AMI, mxnet==0.9.3, CUDA 7.5, libcudnn.so.5
+* **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 Amazon Community AMI, mxnet==0.9.3, CUDA 7.5, libcudnn.so.5
 * **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
 * **Infrastructure 3**: Google n1-highmem-32 with 8 gpus (nvidia Tesla K80), mxnet_cu80-0.10.0-py2.py3-none-manylinux1_x86_64.whl, [mxnet](https://github.com/dmlc/mxnet/commit/3ceb6d2f91121d5ffa5b81f435e8bcfcc1a75792), NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
 
@@ -56,6 +56,9 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 * 1 NVIDIA Tesla K80 is 17x faster than Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
 * With AWS p2.8x 3 gpus is the fastest configuration. Between 25% and 40% faster than 1 gpu
 * With AWS 4 gpus is slightly faster than 1. And 8 gpus is the slowest
+
+#### To Do:
+* Check MxNet works with last update in (Community) Deep Learning AMI Ubuntu Linux - 1.4_Jun2017 (CuDNN 6.0)
 
 #### Speed issues:
 * See https://github.com/dmlc/mxnet/blob/master/docs/how_to/faq.md#speed
