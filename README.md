@@ -58,6 +58,7 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 * 1 NVIDIA Tesla K80 is 20x faster than Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
 
 #### To Do:
+* Test new AWS [g3 instances](https://blog.dominodatalab.com/new-g3-instances-in-aws-worth-it-for-ml/) 
 * Check MxNet works with last update in (Community) Deep Learning AMI Ubuntu Linux - 1.4_Jun2017 (CuDNN 6.0)
 
 #### Speed issues:
