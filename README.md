@@ -69,6 +69,16 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 | 1 | lenet | 2048 | 4 | 0.988 | 12 | 0.5 (130000 samples/s)
 | 1 | lenet | 2048 | 8 | 0.988 | 12 | 0.3 (217000 samples/s)
 | 1 | lenet | 4096 | 8 | 0.979 | 12 | 0.2 (246000 samples/s)
+| 3\* | lenet | 512 | 8 | 0.991 | 12 | 40.6 (1500 samples/s)
+| 3\* | lenet | 512 | 8 (MXNET_ENABLE_GPU_P2P=0) | 0.991 | 12 | 0.7 (89000 samples/s)
+| 3\* | lenet | 1024 | 1 | 0.991 | 12 | 1.6 (38000 samples/s)
+| 3\* | lenet | 1024 | 4 (MXNET_ENABLE_GPU_P2P=0) | 0.991 | 12 | 0.5 (113000 samples/s)
+| 3\* | lenet | 1024 | 4 | 0.991 | 12 | 0.5 (119000 samples/s)
+| 3\* | lenet | 1024 | 8 (MXNET_ENABLE_GPU_P2P=0) | 0.991 | 12 | 0.4 (152000 samples/s)
+| 3\* | lenet | 2048 | 1 | 0.988 | 12 | 1.5 (40000 samples/s)
+| 3\* | lenet | 2048 | 4 | 0.988 | 12 | 0.4 (138000 samples/s)
+| 3\* | lenet | 2048 | 8 | 0.988 | 12 | 11.0 (5300 samples/s)
+| 3\* | lenet | 2048 | 8 (MXNET_ENABLE_GPU_P2P=0) | 0.988 | 12 | 10.3 (215000 samples/s)
 
 
 #### Conclusions:
