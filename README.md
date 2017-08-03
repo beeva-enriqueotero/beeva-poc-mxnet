@@ -63,6 +63,12 @@ time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epo
 | 5 | lenet | 2048 | 4 | 0.988 | 12 | 0.6 (105000 samples/s)
 | 5 | lenet | 2048 (lr=0.07) | 4 | 0.988 | 12 | 0.6 (105000 samples/s)
 | 5 | lenet | 2048 (lr=0.07, lr-step-epochs=13) | 4 | 0.988 | 12 | 0.6 (105000 samples/s)
+| 1 | lenet | 512 | 8 | 0.991 | 12 | 0.7 (82000 samples/s)
+| 1 | lenet | 1024 | 8 | 0.991 | 12 | 0.4 (157000 samples/s)
+| 1 | lenet | 2048 | 1 | 0.988 | 12 | 1.7 (36000 samples/s)
+| 1 | lenet | 2048 | 4 | 0.988 | 12 | 0.5 (130000 samples/s)
+| 1 | lenet | 2048 | 8 | 0.988 | 12 | 0.3 (217000 samples/s)
+| 1 | lenet | 4096 | 8 | 0.979 | 12 | 0.2 (246000 samples/s)
 
 
 #### Conclusions:
