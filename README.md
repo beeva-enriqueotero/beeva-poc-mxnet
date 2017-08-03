@@ -7,7 +7,7 @@ Proof of Concept with MXNet and GPUs
 * Dataset: MNIST. 60000 train samples, 10000 test samples
 * Model: LeNet
 * Based on https://github.com/dmlc/mxnet/blob/master/docs/how_to/multi_devices.md#how-to-launch-a-job
-* **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 Amazon Community AMI, mxnet==0.9.3, CUDA 7.5, libcudnn.so.5
+* **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.0 Amazon Community AMI, mxnet==0.9.3, NVIDIA Driver 367.57, CUDA 7.5, libcudnn.so.5.1.3
 * **Infrastructure 2**: Google n1-standard-16 with 2 gpus (nvidia Tesla K80), [mxnet](https://github.com/dmlc/mxnet/commit/01b808b88b9f3f3a998541c538ec388d660e4a7c), NVIDIA Driver 375.39, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
 * **Infrastructure 3**: Google n1-highmem-32 with 8 gpus (nvidia Tesla K80), mxnet_cu80-0.10.0-py2.py3-none-manylinux1_x86_64.whl, [mxnet](https://github.com/dmlc/mxnet/commit/3ceb6d2f91121d5ffa5b81f435e8bcfcc1a75792), NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
 * **Infrastructure 4**: Azure NC6 with 1 gpu (nvidia Tesla K80), mxnet==0.9.5 (mxnet-0.9.5-py3.5), [mxnet](https://github.com/apache/incubator-mxnet/commit/0768c0e97c5aa1d142ff0b3b8d37b1c736a42b83), Release 0.10.0.post2, NVIDIA Driver v367.48, CUDA 8.0 (V8.0.61), libcudnn.so.5.1.10 (CuDNN 5.1)
