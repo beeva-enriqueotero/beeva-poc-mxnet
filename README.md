@@ -12,6 +12,7 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 3**: Google n1-highmem-32 with 8 gpus (nvidia Tesla K80), mxnet_cu80-0.10.0-py2.py3-none-manylinux1_x86_64.whl, [mxnet](https://github.com/dmlc/mxnet/commit/3ceb6d2f91121d5ffa5b81f435e8bcfcc1a75792), NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5 (CuDNN 5.1). [How to configure drivers](https://github.com/beeva-enriqueotero/beeva-poc-distributed-tensorflow/blob/master/README_multigpu.md#deploy)
 * **Infrastructure 4**: Azure NC6 with 1 gpu (nvidia Tesla K80), mxnet==0.9.5 (mxnet-0.9.5-py3.5), [mxnet](https://github.com/apache/incubator-mxnet/commit/0768c0e97c5aa1d142ff0b3b8d37b1c736a42b83), Release 0.10.0.post2, NVIDIA Driver v367.48, CUDA 8.0 (V8.0.61), libcudnn.so.5.1.10 (CuDNN 5.1)
 * **Infrastructure 5**: Azure NC24 with 4 gpu (nvidia Tesla K80), mxnet==0.9.5 (mxnet-0.9.5-py3.5), [mxnet](https://github.com/apache/incubator-mxnet/commit/0768c0e97c5aa1d142ff0b3b8d37b1c736a42b83), Release 0.10.0.post2, NVIDIA Driver v367.48, CUDA 8.0 (V8.0.61), libcudnn.so.5.1.10 (CuDNN 5.1)
+* **Infrastructure 3\*** (3/08/2017): Google n1-highmem-32 with 8 gpus (nvidia Tesla K80), mxnet_cu80-0.10.0-py2.py3-none-manylinux1_x86_64.whl, Ubuntu 16.04 LTS, NVIDIA Driver 375.66, libcudnn.so.5.1.10 (CuDNN 5.1). With GPU support in 50% of peer connections
 
 ```
 time python ./example/image-classification/train_mnist.py --gpus 0,1,2 --num-epochs 12 --network lenet --batch-size 512 --disp-batches 50
