@@ -20,5 +20,6 @@ time python ./example/image-classification/train_cifar10.py --gpus 0 --num-epoch
 
 | infrastructure | model | batch size | gpus | Accuracy (validation) | Epochs | Training time (s/epoch)
 | --- | --- | --- | --- | --- | --- | ---
-| 1 | resnet110 | 128 | 1 | 0.818 | 12 | 3.1 520 samples/s) 
+| 1 | resnet110 | 128 | 1 | 0.818 | 12 | 96.9 520 samples/s) 
+| 1 | resnet50 | 64x8 | 8 | 0.702 | 12 | 8.1s 6200 samples/s) 
 
