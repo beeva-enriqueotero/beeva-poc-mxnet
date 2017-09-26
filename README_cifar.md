@@ -12,6 +12,7 @@ Proof of Concept with MXNet and GPUs
 
 ```
 time python ./example/image-classification/train_cifar10.py --gpus 0 --num-epochs 12 --network resnet --batch-size 128 --disp-batches 20
+time python ./example/image-classification/train_cifar10.py --gpus 0,1,2,3 --num-epochs 12 --network resnet --num-layers 50 --batch-size 256 --lr=0.2
 
 ```
 
@@ -20,6 +21,12 @@ time python ./example/image-classification/train_cifar10.py --gpus 0 --num-epoch
 
 | infrastructure | model | batch size | gpus | Accuracy (validation) | Epochs | Training time (s/epoch)
 | --- | --- | --- | --- | --- | --- | ---
-| 1 | resnet110 | 128 | 1 | 0.818 | 12 | 96.9 520 samples/s) 
-| 1 | resnet50 | 64x8 | 8 | 0.702 | 12 | 8.1s 6200 samples/s) 
+| 1 | resnet110 | 128 | 1 | 0.818 | 12 | 96.9 520 samples/s 
+| 1 | resnet50 | 64x8 | 8 | 0.702 | 12 | 8.1s 6200 samples/s
+| 1 | resnet50 | 64x4 | 4 | 0.768 | 12 | 13.8s 3600 samples/s 
+| 1 | resnet50 | 64x2 | 2 | 0.817 | 12 | 27.1s 1800 samples/s 
+| 1 | resnet50 | 64x4 | 4 | 0.817 | 12 | 13.8s 1800 samples/s 
+| 1 | resnet50 | 64x4 (lr=0.2) | 4 | 0.783 | 12 | 13.8s 3600 samples/s 
+| 1 | resnet50 | 64x8 (lr=0.4) | 8 | 0.765 | 12 | 8.0s 6200 samples/s 
+| 1 | resnet50 | 64x8 (lr=0.05) | 1 | x? | 12 | 36.3 1400 samples/s 
 
