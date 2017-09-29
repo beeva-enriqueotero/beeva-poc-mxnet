@@ -10,6 +10,8 @@ Proof of Concept with MXNet and GPUs
 * Based on https://github.com/dmlc/mxnet/blob/master/docs/how_to/multi_devices.md#how-to-launch-a-job
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.3 Ubuntu AMI, mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 * **Infraestructure 2**: DGX1 (8 nvidia P100)
+* **Infrastructure 3**: AWS c4.4xlarge. Intel(R) Xeon(R) CPU E5-2666 v3 @ 2.90GHz. 16 processors. Deep Learning 2.3 Ubuntu AMI, mxnet==0.11.0
+
 
 ```
 time python ./example/image-classification/train_cifar10.py --gpus 0 --num-epochs 12 --network resnet --batch-size 128 --disp-batches 20
@@ -61,6 +63,10 @@ time python ./example/image-classification/train_cifar10.py --gpus 0,1,2,3 --num
 | 2 | resnet50 | 128x4=512 (lr=0.2) |4| 0.734 | 12 | 4.5 | 12000 (4-80%)
 | 2 | resnet50 | 128x2=256 (lr=0.1) |2| 0.767 | 12 | 8.2 | 6100 (2-80%)
 | 2 | resnet50 | 128x1=128 (lr=0.05) |1| 0.817 | 12 | 17.2 | 2900 (1-80%)
+| --- | --- | --- | --- | --- | --- | --- | ---
+| 3 | resnet50 | 256 (lr=0.05) |0| x | 12 | 152 | 340
+| --- | --- | --- | --- | --- | --- | --- | ---
+| 4 | resnet50 | 256 (lr=0.05) |0| x | 12 |  | 33
 
 
 
