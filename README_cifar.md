@@ -11,6 +11,7 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.3 Ubuntu AMI, mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 * **Infraestructure 2**: DGX1 (8 nvidia P100)
 * **Infrastructure 3**: AWS c4.4xlarge. Intel(R) Xeon(R) CPU E5-2666 v3 @ 2.90GHz. 16 processors. Deep Learning 2.3 Ubuntu AMI, mxnet==0.11.0
+* **Infrastructure 4**: Laptop (user-HP-ProBook-640-G2). Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz. 4 processors. Ubuntu 16.04 LTS,  mxnet==0.11.0
 
 
 ```
