@@ -12,6 +12,7 @@ Proof of Concept with MXNet and GPUs
 * **Infraestructure 2**: DGX1 (8 nvidia P100)
 * **Infrastructure 3**: AWS c4.4xlarge. Intel(R) Xeon(R) CPU E5-2666 v3 @ 2.90GHz. 16 processors. Deep Learning 2.3 Ubuntu AMI, mxnet==0.11.0
 * **Infrastructure 4**: Laptop (user-HP-ProBook-640-G2). Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz. 4 processors. Ubuntu 16.04 LTS,  mxnet==0.11.0
+* **Infrastructure 1\***: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.4 Ubuntu AMI, mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
 
 ```
@@ -68,6 +69,10 @@ time python ./example/image-classification/train_cifar10.py --gpus 0,1,2,3 --num
 | 3 | resnet50 | 256 (lr=0.05) |0| x | 12 | 152 | 340
 | --- | --- | --- | --- | --- | --- | --- | ---
 | 4 | resnet50 | 256 (lr=0.05) |0| x | 12 |  | 33
+| --- | --- | --- | --- | --- | --- | --- | ---
+| 1* | resnet50 | 512x8 (lr=0.4) | 8 | 0.611 | 12 | 5.0 | 10000 (8-95%)
+| 1* | resnet50 | 512 (lr=0.05) | 8 | x | 12 | 37.1 | 1300 (1-97%)
+
 
 
 
