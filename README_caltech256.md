@@ -16,6 +16,7 @@ Proof of Concept with MXNet and GPUs
 # ./data/caltech256.sh
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 32 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125
+python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6 --lr 0.01
 ```
 
 
@@ -27,9 +28,17 @@ python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-tr
 | 1 | imagenet11k-resnet-152 | 16x8 = 128 | 8 | 0.833 | 1 | 126 | 150 | 83% (65% to 97%)
 | 1 | imagenet11k-resnet-152 | 16 (lr = 0.01) | 1 | 0.635 | 1 | 770 | 20 | 95%
 | 1 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.836 | 1 | 770 | 20 | 95%
-| 1 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 0 |  |  |  | 5 | 0% (1700%)
+| 1 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 0 |  |  |  | 5 | 0% (1700% cpu)
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 1 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 0 |  |  |  | 6 | 0% (1700% cpu)
 | 1 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 |  |  |  | 21 | 97%
 | 1 | imagenet11k-resnet-152 | 32x8 = 256 (lr = 0.02) | 8 | 0.830 | 1 | 121 | 160 | 97%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 1 | imagenet11k-resnet-152 | 64 | 1 | outofmemory |  |  | 21 | 97%
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 1 | imagenet1k-resnet-50 | 16x8 = 128 | 8 | 0.755 | 6 | 43 | 360 | 89% (85% to 97%)
+| 1 | imagenet1k-resnet-50 | 16 | 1 |  |  |  | 48 | 96%
+| 1 | imagenet1k-resnet-50 | 16 | 0 |  |  |  | 11 | 0% (1800% cpu)
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+
+
