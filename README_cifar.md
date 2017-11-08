@@ -13,7 +13,7 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 3**: AWS c4.4xlarge. Intel(R) Xeon(R) CPU E5-2666 v3 @ 2.90GHz. 16 processors. Deep Learning 2.3 Ubuntu AMI, mxnet==0.11.0
 * **Infrastructure 4**: Laptop (user-HP-ProBook-640-G2). Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz. 4 processors. Ubuntu 16.04 LTS,  mxnet==0.11.0
 * **Infrastructure 1\***: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning 2.4 Ubuntu AMI, mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
-
+* **Infraestructure 5**: p3.2x (1 V100) and nvidia mxnet container 17.10 
 
 ```
 time python ./example/image-classification/train_cifar10.py --gpus 0 --num-epochs 12 --network resnet --batch-size 128 --disp-batches 20
@@ -81,6 +81,12 @@ time python ./example/image-classification/train_cifar10.py --gpus 0,1,2,3 --num
 | 1* | lenet | 512 (lr=0.4) |1| 0.211 | 12 | 1.5 | 35000 (1-95%)
 | 1* | lenet | 512 (lr=0.4) |0| 0.187 | 12 | 15.1 | 3000
 
+ --- | --- | --- | --- | --- | --- | --- | ---
+| 5 | resnet50 | 256x8=2048 (lr=0.8) |8| 0.673 | 12 | 5.8 | 8300 (96%)
+| 5 | resnet50 | 256x4=1024 (lr=0.4) |4| 0.746 | 12 | 5.6 | 8600 (92%)
+
+| 5 | resnet50 | 256x2=512 (lr=0.2) |1| 0.768 | 12 | 6.5 | 7500 (86%)
+| 5 | resnet50 | 256x1 (lr=0.1) |1| 0.783 | 12 | 8.1 | 6100 (76%)
 
 
 
