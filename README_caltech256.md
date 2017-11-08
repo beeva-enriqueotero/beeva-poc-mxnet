@@ -12,6 +12,15 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 2**: AWS p3.8x (4 gpus nvidia Volta V100). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
+* **Infrastructure 3**: AWS p3.2x (1 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+
+```
+# If infrastructure 3 (needs 2 mins to pull the container)
+# nvidia-docker run -it nvcr.io/nvidia/mxnet:17.10 /bin/bash
+# cd /opt/mxnet/example/image-classification
+# pip install future
+# ./data/caltech256.sh
+```
 
 ```
 # cd src/mxnet/example/image-classification
@@ -43,4 +52,13 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | 1 | imagenet1k-resnet-50 | 16 | 0 |  |  |  | 11 | 0% (1800% cpu)
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 1 | imagenet11k-resnet-152 | 16x8 = 128 | 1 to 4 | cudaErrorCudartUnloading CUDA: unknown error
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 3 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.829 | 1 | 149 | 104 | 82%
+| 3 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.841 | 1 | 118 | 130 | 89%
+| 3 | imagenet11k-resnet-152 | 64 (lr = 0.005) | 1 | outofmemory |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 1 | imagenet1k-resnet-50 | 16 (lr = 0.00125)| 1 | 0.271 | 1 | 60 | 260 | 86%
+| 1 | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.338 | 1 | 51 | 300 | 90%
+| 1 | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.379 | 1 | 46 | 335 | 95%
+| 1 | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  | 
 
