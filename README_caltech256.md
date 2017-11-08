@@ -10,6 +10,8 @@ Proof of Concept with MXNet and GPUs
 * Based on https://github.com/apache/incubator-mxnet/tree/master/example/image-classification#fine-tune-another-dataset and https://github.com/dmlc/mxnet-notebooks/blob/master/python/how_to/finetune.ipynb
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
+* **Infrastructure 2**: AWS p3.8x (4 gpus nvidia Volta V100). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
+
 
 ```
 # cd src/mxnet/example/image-classification
@@ -40,5 +42,5 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | 1 | imagenet1k-resnet-50 | 16 | 1 |  |  |  | 48 | 96%
 | 1 | imagenet1k-resnet-50 | 16 | 0 |  |  |  | 11 | 0% (1800% cpu)
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
-
+| 1 | imagenet11k-resnet-152 | 16x8 = 128 | 1 to 4 | cudaErrorCudartUnloading CUDA: unknown error
 
