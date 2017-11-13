@@ -16,8 +16,10 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 3**: AWS p3.2x (1 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 * **Infrastructure 3b**: AWS p3.2x (1 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==0.12.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
+
+* **Infrastructure 4**: AWS p3.8x (4 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 ```
-# If infrastructure 3 (needs 2 mins to pull the container)
+# If infrastructure 3 or 4 (needs 2 mins to pull the container)
 # nvidia-docker run -it nvcr.io/nvidia/mxnet:17.10 /bin/bash
 # cd /opt/mxnet/example/image-classification
 # pip install future
@@ -84,3 +86,17 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | 3b | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.304+-0.001 | 1 | 51 | 300 | 90%
 | 3b | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.333+-0.001 | 1 | 46 | 335 | 95%
 | 3b | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 4 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.835 | 1 | 147 | 104 | 82%
+| 4 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.843 | 1 | 119 | 130 | 89%
+| 4 | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.835+-0.001 | 1 | 41 | 410 | 4x 80%
+| 4 | imagenet11k-resnet-152 | 4x32 (lr = 0.01) | 4 | 0.836+-0.001 | 1 | 34 | 520 | 4x 86%
+| 4 | imagenet11k-resnet-152 | 256 (lr = 0.02)| 4 | outofmemory | |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 4 | imagenet1k-resnet-50 | 16 (lr = 0.00125)| 1 | 0.271 | 1 | 60 | 260 | 86%
+| 4 | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.337 | 1 | 51 | 300 | 90%
+| 4 | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.363 | 1 | 46 | 335 | 95%
+| 4 | imagenet1k-resnet-50 | 4x16 = 64 (lr = 0.005)| 4 | 0.275 | 1 | 16 | 1010 | 81%
+| 4 | imagenet1k-resnet-50 | 4x32 = 128 (lr = 0.01)| 4 | 0.341 | 1 | 14 | 1200 | 88%
+| 4 | imagenet1k-resnet-50 | 4x64 = 256 (lr = 0.02)| 4 | 0.372 | 1 | 13 | 1340 | 94%
+| 4 | imagenet1k-resnet-50 | 4x128 (lr = 0.04)| 4 | outofmemory | |  |  |
