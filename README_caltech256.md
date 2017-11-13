@@ -8,12 +8,14 @@ Proof of Concept with MXNet and GPUs
 * Models: ResNet-152
 
 * Based on https://github.com/apache/incubator-mxnet/tree/master/example/image-classification#fine-tune-another-dataset and https://github.com/dmlc/mxnet-notebooks/blob/master/python/how_to/finetune.ipynb
+
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
 * **Infrastructure 2**: AWS p3.8x (4 gpus nvidia Volta V100). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
 * **Infrastructure 3**: AWS p3.2x (1 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
+* **Infrastructure 3b**: AWS p3.2x (1 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==0.12.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
 ```
 # If infrastructure 3 (needs 2 mins to pull the container)
 # nvidia-docker run -it nvcr.io/nvidia/mxnet:17.10 /bin/bash
@@ -26,7 +28,7 @@ Proof of Concept with MXNet and GPUs
 # cd src/mxnet/example/image-classification
 # ./data/caltech256.sh
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6
-python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 32 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125
+python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 16 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125
 python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6 --lr 0.01
 ```
 
@@ -60,5 +62,13 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | 3 | imagenet1k-resnet-50 | 16 (lr = 0.00125)| 1 | 0.271 | 1 | 60 | 260 | 86%
 | 3 | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.338 | 1 | 51 | 300 | 90%
 | 3 | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.379 | 1 | 46 | 335 | 95%
-| 3 | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  | 
-
+| 3 | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 3b | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.826 | 1 | 149 | 104 | 82%
+| 3b | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.824+-0.006 | 1 | 118 | 130 | 89%
+| 3b | imagenet11k-resnet-152 | 64 (lr = 0.005) | 1 | outofmemory |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 3b | imagenet1k-resnet-50 | 16 (lr = 0.00125)| 1 | 0.242+-0.001 | 1 | 60 | 260 | 86%
+| 3b | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.304+-0.001 | 1 | 51 | 300 | 90%
+| 3b | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.333+-0.001 | 1 | 46 | 335 | 95%
+| 3b | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  |
