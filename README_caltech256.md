@@ -25,6 +25,18 @@ Proof of Concept with MXNet and GPUs
 ```
 
 ```
+# If infrastructure 3b (needs 5 mins to install dependencies and reboot)
+# sudo apt install libgfortran3 libsm6 libxrender1 cuda9 nvidia-384 python-dev virtualenv
+# virtualenv mxnet
+# source mxnet/bin/activate
+# pip install mxnet-cu90 opencv-python future
+# git clone https://github.com/apache/incubator-mxnet
+# sudo reboot
+# ce incubator-mxnet/example/image-classification
+# ./data/caltech256.sh
+```
+
+```
 # cd src/mxnet/example/image-classification
 # ./data/caltech256.sh
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6
