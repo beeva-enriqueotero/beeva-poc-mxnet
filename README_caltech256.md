@@ -51,14 +51,14 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | 1 | imagenet1k-resnet-50 | 16 | 1 |  |  |  | 48 | 96%
 | 1 | imagenet1k-resnet-50 | 16 | 0 |  |  |  | 11 | 0% (1800% cpu)
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
-| 1 | imagenet11k-resnet-152 | 16x8 = 128 | 1 to 4 | cudaErrorCudartUnloading CUDA: unknown error
+| 3 | imagenet11k-resnet-152 | 16x8 = 128 | 1 to 4 | cudaErrorCudartUnloading CUDA: unknown error
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 3 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.829 | 1 | 149 | 104 | 82%
 | 3 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.841 | 1 | 118 | 130 | 89%
 | 3 | imagenet11k-resnet-152 | 64 (lr = 0.005) | 1 | outofmemory |  |  |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
-| 1 | imagenet1k-resnet-50 | 16 (lr = 0.00125)| 1 | 0.271 | 1 | 60 | 260 | 86%
-| 1 | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.338 | 1 | 51 | 300 | 90%
-| 1 | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.379 | 1 | 46 | 335 | 95%
-| 1 | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  | 
+| 3 | imagenet1k-resnet-50 | 16 (lr = 0.00125)| 1 | 0.271 | 1 | 60 | 260 | 86%
+| 3 | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.338 | 1 | 51 | 300 | 90%
+| 3 | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.379 | 1 | 46 | 335 | 95%
+| 3 | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  | 
 
