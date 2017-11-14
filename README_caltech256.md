@@ -11,6 +11,9 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 1**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
+
+* **Infrastructure 1b**: AWS p2.8x (8 gpus nvidia Tesla K80). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10. [Boosted](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/optimize_gpu.html)
+
 * **Infrastructure 2**: AWS p3.8x (4 gpus nvidia Volta V100). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
 * **Infrastructure 3**: AWS p3.2x (1 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
@@ -41,7 +44,7 @@ Proof of Concept with MXNet and GPUs
 ```
 # cd src/mxnet/example/image-classification
 # ./data/caltech256.sh
-python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6
+python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 256 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.02
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 16 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125
 python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6 --lr 0.01
 ```
@@ -59,7 +62,9 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 1 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 0 |  |  |  | 6 | 0% (1700% cpu)
 | 1 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 |  |  |  | 21 | 97%
-| 1 | imagenet11k-resnet-152 | 32x8 = 256 (lr = 0.02) | 8 | 0.830 | 1 | 121 | 160 | 97%
+| 1 | imagenet11k-resnet-152 | 32x8 = 256 (lr = 0.02) | 8 | 0.825+-0.05 | 1 | 121 | 160 | 97%
+| 1b | imagenet11k-resnet-152 | 32x8 = 256 (lr = 0.02) | 8 | 0.810 | 1 | 119.5+-0.5 | 160 | 97%
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 1 | imagenet11k-resnet-152 | 64 | 1 | outofmemory |  |  | 21 | 97%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
