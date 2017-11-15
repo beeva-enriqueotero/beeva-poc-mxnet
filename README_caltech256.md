@@ -107,3 +107,12 @@ python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6
 | 4 | imagenet1k-resnet-50 | 4x32 = 128 (lr = 0.01)| 4 | 0.341 | 1 | 14 | 1200 | 88%
 | 4 | imagenet1k-resnet-50 | 4x64 = 256 (lr = 0.02)| 4 | 0.372 | 1 | 13 | 1340 | 94%
 | 4 | imagenet1k-resnet-50 | 4x128 (lr = 0.04)| 4 | outofmemory | |  |  |
+
+
+#### Conclusions:
+- P3 instances have great performance and cost effective on-demand prices :)
+- Still their scarce availability affects spot market :(
+- We got similar throughput without Nvidia MxNet optimized container, but container provides between 2% to 10% more accuracy
+- We were unable to get benefits with float16. More [info](https://github.com/apache/incubator-mxnet/issues/7778)
+
+
