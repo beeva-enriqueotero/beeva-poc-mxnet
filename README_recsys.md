@@ -1,7 +1,7 @@
 # beeva-poc-mxnet
 Proof of Concept with MXNet and GPUs
 
-### Experiment: recommender system based on MxNet examples
+## Experiments: recommender system based on MxNet examples
 
 Based on [MxNet recommender examples](https://github.com/apache/incubator-mxnet/tree/master/example/recommenders)
 
@@ -11,13 +11,8 @@ More references:
 
 Note: we have to convert rating prediction examples to learning to rank approach.
 
+### Test 1: Logistic Regression
 
-### Results:
-Original example:
-![Original example](images/demo2-binary-maeregression.png)
-
-With LogisticRegressionOutput:
-![With LogisticRegressionOutput](images/demo2-binary-logisticregression.png)
 ```
 def plain_net2(k):
     # input
@@ -38,6 +33,14 @@ def plain_net2(k):
     pred = mx.symbol.LogisticRegressionOutput(data=cosine, label=label)
     return pred
 ```
+
+### Test 1: Results:
+Original example:
+![Original example](images/demo2-binary-maeregression.png)
+
+With LogisticRegressionOutput:
+![With LogisticRegressionOutput](images/demo2-binary-logisticregression.png)
+
 
 ### Conclusions:
 - MxNet examples are oriented to rating prediction
