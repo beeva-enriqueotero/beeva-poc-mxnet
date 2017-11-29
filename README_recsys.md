@@ -11,7 +11,8 @@ More references:
 
 Note: we have to convert rating prediction examples to learning to rank approach.
 
-### Test 1: Logistic Regression
+### Tests
+- Logistic Regression
 
 ```
 def plain_net2(k):
@@ -30,15 +31,41 @@ def plain_net2(k):
     dot = mx.symbol.sum_axis(dot, axis=1)
     dot = mx.symbol.Flatten(dot)
     cosine = 1 - dot
+    
     pred = mx.symbol.LogisticRegressionOutput(data=cosine, label=label)
     return pred
 ```
-
-### Test 1: Results:
-Original example:
+- CrossEntropy
+```
+def plain_net3(k):
+    # input
+    user = mx.symbol.Variable('user')
+    item = mx.symbol.Variable('item')
+    label = mx.symbol.Variable('score')
+    # user feature lookup
+    user = mx.symbol.Embedding(data = user, input_dim = max_user, output_dim = k)
+    # item feature lookup
+    item = mx.symbol.Embedding(data = item, input_dim = max_item, output_dim = k)
+    # loss layer
+    
+    a = mx.symbol.L2Normalization(user)
+    b = mx.symbol.L2Normalization(item)
+    dot = a * b
+    dot = mx.symbol.sum_axis(dot, axis=1)
+    dot = mx.symbol.Flatten(dot)
+    cosine = 1 - dot
+    
+    label = mx.symbol.Flatten(label)
+    pred = mx.symbol.clip(cosine,0,1)
+    pred = recotools.CrossEntropyLoss(data=pred, label=label)
+    
+    return pred
+```
+### Results:
+- Original example:
 ![Original example](images/demo2-binary-maeregression.png)
 
-With LogisticRegressionOutput:
+- With LogisticRegressionOutput:
 ![With LogisticRegressionOutput](images/demo2-binary-logisticregression.png)
 
 
