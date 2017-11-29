@@ -11,5 +11,38 @@ More references:
 
 Note: we have to convert rating prediction examples to learning to rank approach.
 
+
+### Results:
+Original example:
+![Original example](images/demo2-binary-maeregression.png)
+
+With LogisticRegressionOutput:
+![With LogisticRegressionOutput](images/demo2-binary-maeregression.png)
+```
+def plain_net2(k):
+    # input
+    user = mx.symbol.Variable('user')
+    item = mx.symbol.Variable('item')
+    label = mx.symbol.Variable('score')
+    # user feature lookup
+    user = mx.symbol.Embedding(data = user, input_dim = max_user, output_dim = k)
+    # item feature lookup
+    item = mx.symbol.Embedding(data = item, input_dim = max_item, output_dim = k)
+    # loss layer
+    a = mx.symbol.L2Normalization(user)
+    b = mx.symbol.L2Normalization(item)
+    dot = a * b
+    dot = mx.symbol.sum_axis(dot, axis=1)
+    dot = mx.symbol.Flatten(dot)
+    cosine = 1 - dot
+    pred = mx.symbol.LogisticRegressionOutput(data=cosine, label=label)
+    return pred
+```
+
+### Conclusions:
+- MxNet examples are oriented to rating prediction
+- CosineLoss is based on MAERegressionOutput
+- LogisticRegressionOutput gets better RMSE than MAERegressionOutput
+
 ### Issues:
 - MxNet output layers are not flexible to output probabilities. And this is required to apply crossentropy. [More info](https://github.com/apache/incubator-mxnet/issues/8807)
