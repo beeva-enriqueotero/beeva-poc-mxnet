@@ -76,3 +76,4 @@ def plain_net3(k):
 
 ### Issues:
 - MxNet output layers are not flexible to output probabilities. And this is required to apply crossentropy. [More info](https://github.com/apache/incubator-mxnet/issues/8807)
+- softmax_cross_entropy raises error. [More info](https://github.com/apache/incubator-mxnet/pull/6766)
