@@ -17,7 +17,7 @@ Original example:
 ![Original example](images/demo2-binary-maeregression.png)
 
 With LogisticRegressionOutput:
-![With LogisticRegressionOutput](images/demo2-binary-maeregression.png)
+![With LogisticRegressionOutput](images/demo2-binary-logisticregression.png)
 ```
 def plain_net2(k):
     # input
