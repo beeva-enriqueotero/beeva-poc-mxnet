@@ -12,6 +12,8 @@ More references:
 Note: we have to convert rating prediction examples to learning to rank approach.
 
 ### Tests
+#### Rating prediction
+
 - Logistic Regression
 
 ```
@@ -68,11 +70,17 @@ def plain_net3(k):
 - With LogisticRegressionOutput:
 ![With LogisticRegressionOutput](images/demo2-binary-logisticregression.png)
 
+#### Learning to rank:
+- Original example. F1 score (20 epochs) = 0.82
+- With recotools.CrossEntropyLoss (exact backwards). 20 epochs = 0.95
+- [Source code](https://github.com/beeva-enriqueotero/incubator-mxnet)
 
 ### Conclusions:
 - MxNet examples are oriented to rating prediction
 - CosineLoss is based on MAERegressionOutput
 - LogisticRegressionOutput gets better RMSE than MAERegressionOutput
+- We adapted examples to use other metrics.
+- We're still not able to beat F1 score for original example
 
 ### Issues:
 - MxNet output layers are not flexible to output probabilities. And this is required to apply crossentropy. [More info](https://github.com/apache/incubator-mxnet/issues/8807)
