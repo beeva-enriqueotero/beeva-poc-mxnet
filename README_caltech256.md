@@ -31,7 +31,7 @@ Proof of Concept with MXNet and GPUs
 
 ```
 # If infrastructure 3b (needs 5 mins to install dependencies and reboot)
-# sudo apt install libgfortran3 libsm6 libxrender1 cuda9 nvidia-384 python-dev virtualenv
+# sudo apt install libgfortran3 libsm6 libxrender1 cuda nvidia-384 python-dev virtualenv
 # virtualenv mxnet
 # source mxnet/bin/activate
 # pip install mxnet-cu90 opencv-python future
