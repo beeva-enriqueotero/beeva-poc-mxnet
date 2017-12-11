@@ -16,7 +16,7 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 2**: AWS p3.8x (4 gpus nvidia Volta V100). Deep Learning AMI Ubuntu Linux - 2.4_Oct2017 (ami-37bb714d), mxnet==0.11.0, NVIDIA Driver 375.66, CUDA 8.0, libcudnn.so.5.1.10
 
-* **Infrastructure 3**: AWS p3.2x (1 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+* **Infrastructure 3**: AWS p3.2x (1 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10 (NVIDIA cloud), NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 * **Infrastructure 3b**: AWS p3.2x (1 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==0.12.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
 
@@ -37,7 +37,7 @@ Proof of Concept with MXNet and GPUs
 # pip install mxnet-cu90 opencv-python future
 # git clone https://github.com/apache/incubator-mxnet
 # sudo reboot
-# ce incubator-mxnet/example/image-classification
+# cd incubator-mxnet/example/image-classification
 # ./data/caltech256.sh
 ```
 
