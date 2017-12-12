@@ -31,13 +31,16 @@ Proof of Concept with MXNet and GPUs
 
 ```
 # If infrastructure 3b (needs 5 mins to install dependencies and reboot)
-# sudo apt install libgfortran3 libsm6 libxrender1 cuda nvidia-384 python-dev virtualenv
+# sudo apt install libgfortran3 libsm6 libxrender1 nvidia-384 python-dev virtualenv
+# sudo apt install cuda
 # virtualenv mxnet
-# source mxnet/bin/activate
+# source ~/mxnet/bin/activate
 # pip install mxnet-cu90 opencv-python future
 # git clone https://github.com/apache/incubator-mxnet
 # sudo reboot
 # cd incubator-mxnet/example/image-classification
+# source ~/mxnet/bin/activate
+# export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # ./data/caltech256.sh
 ```
 
