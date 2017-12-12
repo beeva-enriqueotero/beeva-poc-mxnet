@@ -21,6 +21,8 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 3b**: AWS p3.2x (1 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==0.12.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
 
 * **Infrastructure 4**: AWS p3.8x (4 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+
+* **Infrastructure 4b**: AWS p3.8x (8 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==1.0.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
 ```
 # If infrastructure 3 or 4 (needs 2 to 10 mins to pull the container)
 # nvidia-docker run -it nvcr.io/nvidia/mxnet:17.10 /bin/bash
@@ -33,13 +35,12 @@ Proof of Concept with MXNet and GPUs
 # If infrastructure 3b (needs 5 mins to install dependencies and reboot)
 # sudo apt install libgfortran3 libsm6 libxrender1 nvidia-384 python-dev virtualenv
 # sudo apt install cuda-9-0
+# sudo reboot
 # virtualenv ~/mxnet
 # source ~/mxnet/bin/activate
 # pip install mxnet-cu90 opencv-python future
 # git clone https://github.com/apache/incubator-mxnet
-# sudo reboot
 # cd incubator-mxnet/example/image-classification
-# source ~/mxnet/bin/activate
 # ./data/caltech256.sh
 ```
 
