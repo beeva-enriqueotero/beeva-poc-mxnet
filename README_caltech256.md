@@ -25,6 +25,8 @@ Proof of Concept with MXNet and GPUs
 * **Infrastructure 4**: AWS p3.8x (4 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 * **Infrastructure 4b**: AWS p3.8x (8 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==1.0.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
+
+* **Infrastructure 4c**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), mxnet-cu90==0.12.0, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 ```
 # If infrastructure 3 or 4 (needs 2 to 10 mins to pull the container)
 # nvidia-docker run -it nvcr.io/nvidia/mxnet:17.10 /bin/bash
@@ -62,6 +64,7 @@ Proof of Concept with MXNet and GPUs
 # ./data/caltech256.sh
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 256 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.02
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 16 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125
+python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 64 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.005 --data-nthreads 20
 python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6 --lr 0.01
 MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 32 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.0025 --dtype float16 --data-nthreads 20
 ```
@@ -126,6 +129,8 @@ MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11
 | 4 | imagenet1k-resnet-50 | 4x32 = 128 (lr = 0.01)| 4 | 0.341 | 1 | 14 | 1200 | 88%
 | 4 | imagenet1k-resnet-50 | 4x64 = 256 (lr = 0.02)| 4 | 0.372 | 1 | 13 | 1340 | 94%
 | 4 | imagenet1k-resnet-50 | 4x128 (lr = 0.04)| 4 | outofmemory | |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 4c | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.840+-0.001 | 1 | 49 | 355 | 4x 80%
 
 
 #### Conclusions:
