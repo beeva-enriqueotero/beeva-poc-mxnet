@@ -131,7 +131,7 @@ MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11
 | 4 | imagenet1k-resnet-50 | 4x128 (lr = 0.04)| 4 | outofmemory | |  |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 4c | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.840+-0.001 | 1 | 49 | 355 | 4x 80%
-| 4c | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.835+-0.002 | 1 | 35 | 517 | 4x 90%
+| 4c | imagenet11k-resnet-152 | 4x32 (lr = 0.005) | 4 | 0.835+-0.002 | 1 | 35 | 517 | 4x 90%
 
 
 #### Conclusions:
