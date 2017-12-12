@@ -20,6 +20,8 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 3b**: AWS p3.2x (1 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==0.12.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
 
+* **Infrastructure 3c**: AWS p3.2x (1 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), mxnet-cu90==0.12.0, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+
 * **Infrastructure 4**: AWS p3.8x (4 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 * **Infrastructure 4b**: AWS p3.8x (8 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==1.0.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
@@ -95,6 +97,8 @@ MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11
 | 3b | imagenet1k-resnet-50 | 32 (lr = 0.0025)| 1 | 0.304+-0.001 | 1 | 51 | 300 | 90%
 | 3b | imagenet1k-resnet-50 | 64 (lr = 0.005)| 1 | 0.333+-0.001 | 1 | 46 | 335 | 95%
 | 3b | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 3c | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.825+-0.012 | 1 | 149 | 104 | 82%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 4 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.835 | 1 | 147 | 104 | 82%
 | 4 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.843 | 1 | 119 | 130 | 89%
