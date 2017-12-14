@@ -66,15 +66,16 @@ Proof of Concept with MXNet and GPUs
 
 
 ```
-# If 4e
+# If 3e or 4e
 
-git clone --recursive https://github.com/apache/incubator-mxnet.git --branch 1.0.0
-sudo mkdir /usr/local/nccl/
-sudo cp /lib/nccl/cuda-9/ /usr/local/nccl/lib/ -r
-sudo mkdir /usr/local/nccl/include
-sudo cp /usr/include/nccl.h /usr/local/nccl/include/
-cd incubator-mxnet
-make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1 USE_NCCL=1 USE_NCCL_PATH=/usr/local/nccl/
+# git clone --recursive https://github.com/apache/incubator-mxnet.git --branch 1.0.0
+# sudo mkdir /usr/local/nccl/
+# sudo cp /lib/nccl/cuda-9/ /usr/local/nccl/lib/ -r
+# sudo mkdir /usr/local/nccl/include
+# sudo cp /usr/include/nccl.h /usr/local/nccl/include/
+# cd incubator-mxnet
+# make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1 USE_NCCL=1 USE_NCCL_PATH=/usr/local/nccl/
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/nccl/lib
 # cd example/image-classification
 # ./data/caltech256.sh
 ```
@@ -87,6 +88,7 @@ python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-tr
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 64 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.005 --data-nthreads 20
 python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6 --lr 0.01
 MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 32 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.0025 --dtype float16 --data-nthreads 20imagenet11k-resnet-152
+python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 64 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.005 --kv-store nccl
 ```
 
 
@@ -133,6 +135,8 @@ MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11
 | 3b | imagenet1k-resnet-50 | 128 (lr = 0.01)| 1 | outofmemory | |  |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 3c | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.825+-0.012 | 1 | 149 | 104 | 82%
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 3e | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.844+-0.001 | 1 | 147 | 105 | 83%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 4 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.835 | 1 | 147 | 104 | 82%
 | 4 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.843 | 1 | 119 | 130 | 89%
