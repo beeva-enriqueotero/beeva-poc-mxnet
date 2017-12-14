@@ -71,7 +71,7 @@ Proof of Concept with MXNet and GPUs
 # If 3e or 4e
 
 # git clone --recursive https://github.com/apache/incubator-mxnet.git --branch 1.0.0
-# sudo mkdir /usr/local/nccl/AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a)
+# sudo mkdir /usr/local/nccl
 # sudo cp /lib/nccl/cuda-9/ /usr/local/nccl/lib/ -r
 # sudo mkdir /usr/local/nccl/include
 # sudo cp /usr/include/nccl.h /usr/local/nccl/include/
