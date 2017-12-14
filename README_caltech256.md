@@ -28,7 +28,9 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 4c**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), mxnet-cu90==0.12.0, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
-* **Infrastructure 4d**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=1, kvstore=’nccl’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+* **Infrastructure 4d**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=0, kvstore=’nccl’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+
+* **Infrastructure 4e**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=1, kvstore=’nccl’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 ```
 # If infrastructure 3 or 4 (needs 2 to 10 mins to pull the container)
@@ -59,6 +61,21 @@ Proof of Concept with MXNet and GPUs
 # pip install mxnet-cu90==0.12 opencv-python future
 # git clone https://github.com/apache/incubator-mxnet
 # cd incubator-mxnet/example/image-classification
+# ./data/caltech256.sh
+```
+
+
+```
+# If 4e
+
+git clone --recursive https://github.com/apache/incubator-mxnet.git --branch 1.0.0
+sudo mkdir /usr/local/nccl/
+sudo cp /lib/nccl/cuda-9/ /usr/local/nccl/lib/ -r
+sudo mkdir /usr/local/nccl/include
+sudo cp /usr/include/nccl.h /usr/local/nccl/include/
+cd incubator-mxnet
+make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1 USE_NCCL=1 USE_NCCL_PATH=/usr/local/nccl/
+# cd example/image-classification
 # ./data/caltech256.sh
 ```
 
