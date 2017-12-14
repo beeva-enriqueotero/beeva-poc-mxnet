@@ -30,7 +30,7 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 4c**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), mxnet-cu90==0.12.0, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
-* **Infrastructure 4d**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=0, kvstore=’nccl’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+* **Infrastructure 4d**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=0, kvstore=’device’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 * **Infrastructure 4e**: AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=1, kvstore=’nccl’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
@@ -71,11 +71,13 @@ Proof of Concept with MXNet and GPUs
 # If 3e or 4e
 
 # git clone --recursive https://github.com/apache/incubator-mxnet.git --branch 1.0.0
+# USE_NCCL_PATH in makefile generates -I$(USE_NCCL_PATH)/include and -L$(USE_NCCL_PATH)/lib so... 
 # sudo mkdir /usr/local/nccl
 # sudo cp /lib/nccl/cuda-9/ /usr/local/nccl/lib/ -r
 # sudo mkdir /usr/local/nccl/include
 # sudo cp /usr/include/nccl.h /usr/local/nccl/include/
 # cd incubator-mxnet
+# ... and finally compile mxnet on a P3 instance takes 20 mins approx.
 # make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1 USE_NCCL=1 USE_NCCL_PATH=/usr/local/nccl/
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/nccl/lib
 # cd example/image-classification
@@ -92,6 +94,7 @@ python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --d
 python fine-tune.py --pretrained-model imagenet1k-resnet-50 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 128 --num-classes 256 --num-examples 15240 --num-epochs 6 --lr 0.01
 MXNET_CUDNN_AUTOTUNE_DEFAULT=2 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 32 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.0025 --dtype float16 --data-nthreads 20imagenet11k-resnet-152
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 64 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.005 --kv-store nccl
+python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 64 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.005 --kv-store device
 ```
 
 
@@ -162,9 +165,11 @@ python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --d
 | 4c | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.840+-0.001 | 1 | 49 | 355 | 4x 80%
 | 4c | imagenet11k-resnet-152 | 4x32 (lr = 0.005) | 4 | 0.835+-0.002 | 1 | 35 | 517 | 4x 90%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
-| 4d | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.833+-0.003 | 1 | 45 | 405 | 4x ?
+| 4d | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.833+-0.003 | 1 | 45 | 410 | 4x 83%
 | 4d | imagenet11k-resnet-152 | 4x32 (lr = 0.01) | 4 | 0.829+-0.004 | 1 | 35 | 518 | 4x 90%
-
+| --- | --- | --- | --- | --- | --- | --- | --- | ---
+| 4e | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.830+-0.003 | 1 | 46 | 395 | 4x 84%
+| 4e | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.828+-0.001 | 1 | 37 | 505 | 4x 90%
 
 #### Conclusions:
 - P3 instances have great performance and cost effective on-demand prices :)
