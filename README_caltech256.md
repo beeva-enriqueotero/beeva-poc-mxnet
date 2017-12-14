@@ -22,6 +22,8 @@ Proof of Concept with MXNet and GPUs
 
 * **Infrastructure 3c**: AWS p3.2x (1 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), mxnet-cu90==0.12.0, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
+* **Infrastructure 3e**: AWS p3.2x (1 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a), [mxnet 1.0.0](https://github.com/apache/incubator-mxnet/releases/tag/1.0.0), build with USE_NCCL=1, kvstore=’nccl’, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
+
 * **Infrastructure 4**: AWS p3.8x (4 gpu nvidia V100). NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), nvcr.io mxnet:17.10, NVIDIA Driver 384.81, CUDA 9.0, no libcudnn
 
 * **Infrastructure 4b**: AWS p3.8x (8 gpu nvidia V100). (community) NVIDIA Volta Deep Learning AMI-46a68101-e56b-41cd-8e32-631ac6e5d02b-ami-655e831f.4 (ami-4cc11e36), mxnet-cu90==1.0.0, NVIDIA Driver 384.90, CUDA 9.0, no libcudnn
