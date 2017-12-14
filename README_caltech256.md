@@ -56,7 +56,7 @@ Proof of Concept with MXNet and GPUs
 ```
 
 ```
-# If 3c
+# If 3c or 4c
 # sudo apt install python-dev virtualenv
 # virtualenv ~/mxnet
 # source ~/mxnet/bin/activate
@@ -169,7 +169,7 @@ python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --d
 | 4d | imagenet11k-resnet-152 | 4x32 (lr = 0.01) | 4 | 0.829+-0.004 | 1 | 35 | 518 | 4x 90%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 4e | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.830+-0.003 | 1 | 46 | 395 | 4x 84%
-| 4e | imagenet11k-resnet-152 | 4x16 (lr = 0.005) | 4 | 0.828+-0.001 | 1 | 37 | 505 | 4x 90%
+| 4e | imagenet11k-resnet-152 | 4x32 (lr = 0.005) | 4 | 0.828+-0.001 | 1 | 37 | 505 | 4x 90%
 
 #### Conclusions:
 - P3 instances have great performance and cost effective on-demand prices :)
