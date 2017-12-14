@@ -71,7 +71,7 @@ Proof of Concept with MXNet and GPUs
 # If 3e or 4e
 
 # git clone --recursive https://github.com/apache/incubator-mxnet.git --branch 1.0.0
-# sudo mkdir /usr/local/nccl/
+# sudo mkdir /usr/local/nccl/AWS p3.8x (8 gpu nvidia V100). (community) Deep Learning Base AMI (Ubuntu) Version 2.0 (ami-10ef8d6a)
 # sudo cp /lib/nccl/cuda-9/ /usr/local/nccl/lib/ -r
 # sudo mkdir /usr/local/nccl/include
 # sudo cp /usr/include/nccl.h /usr/local/nccl/include/
@@ -85,6 +85,7 @@ Proof of Concept with MXNet and GPUs
 ```
 # cd src/mxnet/example/image-classification
 # ./data/caltech256.sh
+python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 16 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125 --test-io 1
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3,4,5,6,7 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 256 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.02
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 16 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.00125
 python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --data-train caltech256-train.rec --data-val caltech256-val.rec --batch-size 64 --num-classes 256 --num-examples 15240 --num-epochs 1 --lr 0.005 --data-nthreads 20
@@ -138,7 +139,7 @@ python fine-tune.py --pretrained-model imagenet11k-resnet-152 --gpus 0,1,2,3 --d
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 3c | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.825+-0.012 | 1 | 149 | 104 | 82%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
-| 3e | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.844+-0.001 | 1 | 147 | 105 | 83%
+| 3e | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.842+-0.003 | 1 | 147 | 105 | 83%
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 4 | imagenet11k-resnet-152 | 16 (lr = 0.00125) | 1 | 0.835 | 1 | 147 | 104 | 82%
 | 4 | imagenet11k-resnet-152 | 32 (lr = 0.0025) | 1 | 0.843 | 1 | 119 | 130 | 89%
