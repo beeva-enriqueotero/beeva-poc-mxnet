@@ -29,6 +29,8 @@ Proof of Concept with MXNet and GPUs
 | --- | --- | --- | --- | --- | --- | --- | --- | ---
 | 1 | imagenet11k-resnet-152 | 16 (0.00125) | 1 | 0.839 | 1 |  | 18.9 | 
 | 1 | imagenet11k-resnet-152 | 16 (0.00125) | 1 | 0.842 | 1 |  | 18.9 | 
+| 1 | imagenet11k-resnet-152 | 32 (0.0025) | 1 | 0.842 | 1 |  | 19.8 | 
+| 1 | imagenet11k-resnet-152 | 32 (0.0025) | 1 | 0.842 | 1 |  | 19.8 | 
 
 
 
